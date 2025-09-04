@@ -1,0 +1,118 @@
+.form-control label {
+  position: absolute;
+  background: #fff;
+  padding: 2px 5px;
+  top: 0;
+  transform: translateY(-50%);
+  left: 10px;
+  opacity: 0;
+  font-size: 12px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus-within label {
+  opacity: 1;
+  color: #374151;
+}
+.form-control {
+  position: relative;
+}
+
+input::placeholder {
+  transform: translate(0, 0);
+  transition: all 0.3s ease;
+}
+
+input:focus::placeholder {
+  transform: translate(3px, -23px);
+  opacity: 0;
+  font-size: 12px;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  letter-spacing: 0.2px;
+}
+
+input {
+  box-sizing: border-box; /* Prevent padding/border from affecting dimensions */
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease; /* Smooth changes */
+}
+
+/* WebKit (Chrome, Safari) Autofill Overrides */
+input:-webkit-autofill,
+input:-webkit-autofill:hover {
+  -webkit-box-shadow:
+    0 0 0 1000px #fff inset,
+    0 0 0 1px #9ca3af !important; /* White bg + ring-gray-400 */
+  -webkit-text-fill-color: #374151 !important; /* gray-700 text */
+  border-radius: 0.25rem !important; /* rounded-sm */
+  font-family: "Inter", sans-serif !important;
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: 1.25rem !important; /* text-sm */
+  padding: 0.5rem 0.75rem !important; /* py-2 px-3 */
+  outline: none !important; /* No default outline */
+}
+
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow:
+    0 0 0 1000px #fff inset,
+    0 0 0 2px #374151,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1) !important; /* White bg + focus:ring-2 gray-700 + shadow-md */
+  -webkit-text-fill-color: #374151 !important;
+  border-radius: 0.125rem !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  padding: 0.5rem 0.75rem !important;
+  outline: none !important;
+}
+
+/* Firefox Autofill Overrides */
+input:-moz-autofill,
+input:autofill {
+  /* Covers newer Firefox versions using :autofill */
+  background-color: #fff !important; /* Override yellow bg */
+  color: #000 !important; /* gray-700 text */
+  box-shadow: 0 0 0 1px #9ca3af !important; /* ring-gray-400 */
+  border-radius: 0.125rem !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  padding: 0.5rem 0.75rem !important;
+  outline: none !important;
+  filter: none !important; /* Remove any browser filters causing color issues */
+}
+
+input:focus:-moz-autofill,
+input:focus:autofill {
+  background-color: #fff !important;
+  color: #000 !important;
+  box-shadow:
+    0 0 0 2px #374151,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1) !important; /* focus:ring-2 gray-700 + shadow-md */
+  border-radius: 0.125rem !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  padding: 0.5rem 0.75rem !important;
+  outline: none !important;
+  filter: none !important;
+}
+
+/* Hover in Firefox (for completeness, if needed) */
+input:hover:-moz-autofill,
+input:hover:autofill {
+  background-color: #fff !important;
+  color: #000 !important;
+  box-shadow: 0 0 0 1px #9ca3af !important; /* Maintain normal ring */
+}

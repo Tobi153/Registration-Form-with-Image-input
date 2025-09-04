@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <title>Photo Capture Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <form
+      class="bg-white p-8 rounded-sm-lg shadow-md w-full max-w-md space-y-6"
+      autocomplete="off"
+    >
+      <h2 class="text-2xl font-bold text-center mb-4">Registration Form</h2>
+
+      <!-- Take Photo Field -->
+      <div>
+        <div class="flex flex-col items-center space-y-4">
+          <!-- Avatar/Icon Container -->
+          <div
+            id="snapshot-container"
+            class="w-50 relative h-50 overflow-hidden flex items-center justify-center ring-2 ring-gray-200 bg-gray-100 rounded-sm"
+          >
+            <!-- Heroicons user icon SVG -->
+            <video
+              id="camera-feed"
+              class="w-50 h-50 top-0 left-0 absolute bg-gray-200 rounded-sm object-cover hidden"
+              autoplay
+              playsinline
+            ></video>
+            <i
+              data-lucide="user-round-pen"
+              class="text-gray-700 w-10 h-10 icon-avatar"
+            ></i>
+          </div>
+
+          <canvas id="canvas" class="hidden w-40 h-40 rounded-sm"></canvas>
+          <div class="flex space-x-4 capture-container">
+            <button
+              type="button"
+              id="capture-btn"
+              class="bg-blue-700 mb-0 cursor-pointer text-white transition-all px-4 py-1 rounded-sm hover:bg-blue-800"
+            >
+              Start Camera
+            </button>
+            <button
+              type="button"
+              id="retake-btn"
+              class="bg-gray-200 mb-0 cursor-pointer text-gray-700 px-4 py-1 rounded-sm hidden hover:bg-gray-300 transition-all"
+            >
+              Retake Photo
+            </button>
+          </div>
+          <input type="hidden" name="photo" id="photo-input" />
+        </div>
+      </div>
+
+      <!-- First Name -->
+      <div class="form-control">
+        <label
+          for="firstName"
+          class="block text-gray-500 group-focus-within:text-gray-700 font-normal mb-2"
+          >First Name</label
+        >
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          required
+          class="w-full px-3 text-sm py-2 ring ring-gray-400 focus:shadow-md rounded-sm focus:outline-none focus:ring-2 focus:ring-gray-700"
+          placeholder="First Name"
+        />
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-control">
+        <label
+          for="lastName"
+          class="block text-gray-500 group-focus-within:text-gray-700 font-normal mb-2"
+          >Last Name</label
+        >
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          required
+          class="w-full text-sm px-3 focus:shadow-md py-2 ring-1 ring-gray-400 rounded-sm focus:outline-none focus:ring-2 focus:ring-gray-700"
+          placeholder="Last Name"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-control">
+        <label
+          for="email"
+          class="block text-gray-500 group-focus-within:text-gray-700 font-normal mb-2"
+          >Email</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full text-sm focus:shadow-md px-3 py-2 ring ring-gray-400 rounded-sm focus:outline-none focus:ring-2 focus:ring-gray-700"
+          placeholder="Email"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="form-control input-password relative">
+        <label
+          for="password"
+          class="block text-gray-500 group-focus-within:text-gray-700 font-normal mb-2"
+          >Password</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="w-full text-sm px-3 focus:shadow-md password-input py-2 ring ring-gray-400 rounded-sm focus:outline-none focus:ring-2 focus:ring-gray-700"
+          placeholder="Password"
+        />
+        <span
+          class="toggle-btn absolute right-4 top-[50%] translate-y-[-50%] cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-eye-off-icon lucide-eye-off w-4 h-4 text-gray-500 pointer-events-none"
+          >
+            <path
+              d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"
+            />
+            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+            <path
+              d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"
+            />
+            <path d="m2 2 20 20" />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-eye-icon lucide-eye w-4 h-4 text-gray-700 pointer-events-none"
+          >
+            <path
+              d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+            />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full ring-2 focus:ring-gray-200 bg-gray-800 text-white transition-all py-2 rounded-sm hover:bg-gray-900 cursor-pointer font-normal"
+      >
+        Submit
+      </button>
+    </form>
+
+    <script src="js/tailwind.js"></script>
+    <script src="js/lucide.js"></script>
+
+    <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+    <script>
+      lucide.createIcons();
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
