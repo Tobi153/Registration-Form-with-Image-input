@@ -17,12 +17,13 @@ const elements = {
 };
 
 // Initial setup
-elements.iconEyeOff.style.display = "none";
+elements.iconEyeOff.classList.add("hidden");
+elements.iconEye.classList.add("hidden");
 elements.retakeBtn.classList.add("hidden");
 
 let cameraStream = null;
 let cameraState = "idle"; // State management: 'idle', 'streaming', 'captured'
-
+let isTogglingPassword = false;
 // Access the camera
 async function startCamera() {
   // if (cameraState !== " idle") return;
@@ -48,7 +49,6 @@ function stopCamera() {
     cameraStream.getTracks().forEach((track) => track.stop());
     cameraStream = null;
     elements.cameraFeed.srcObject = null;
-    // console.log(captureBtn.textContent);
     elements.cameraFeed.classList.add("hidden");
   }
 }
@@ -110,22 +110,31 @@ elements.captureBtn.addEventListener("click", () => {
   }
 });
 
-// retakeBtn.addEventListener("click", recaptureImage);
+elements.passwordInput.addEventListener("focus", () => {
+  elements.iconEye.classList.remove("hidden");
+});
 
-// elements.toggleBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   e.stopPropagation();
+elements.toggleBtn.addEventListener("mousedown", () => {
+  isTogglingPassword = true;
+});
 
-//   const isPasswordVisible = passwordInput.type === "text";
-//   passwordInput.type = isPasswordVisible ? "password" : "text";
-//   elements.iconEye.style.display = isPasswordVisible ? "block" : "none";
-//   elements.iconEyeOff.style.display = isPasswordVisible ? "none" : "block";
+elements.toggleBtn.addEventListener("mouseup", () => {
+  isTogglingPassword = false;
+});
 
-//   if (document.activeElement !== passwordInput) {
-//     setTimeout(() => {
-//       passwordInput.focus();
-//     }, 0);
-//   }
-// });
+elements.passwordInput.addEventListener("blur", (e) => {
+  if (isTogglingPassword) {
+    elements.passwordInput.focus();
+    // No need to preventDefault; blur isn't cancelable, but refocus works
+  }
+});
+
+elements.toggleBtn.addEventListener("click", (e) => {
+  const isPasswordVisible = elements.passwordInput.type === "text";
+  elements.passwordInput.type = isPasswordVisible ? "password" : "text";
+  elements.iconEye.style.display = isPasswordVisible ? "block" : "none";
+  elements.iconEyeOff.style.display = isPasswordVisible ? "none" : "block";
+});
+console.log(elements.passwordInput);
 
 window.addEventListener("beforeunload", stopCamera);

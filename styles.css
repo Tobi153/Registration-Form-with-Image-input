@@ -51,7 +51,7 @@ input:-webkit-autofill:hover {
   -webkit-box-shadow:
     0 0 0 1000px #fff inset,
     0 0 0 1px #9ca3af !important; /* White bg + ring-gray-400 */
-  -webkit-text-fill-color: #374151 !important; /* gray-700 text */
+  -webkit-text-fill-color: #000 !important; /* gray-700 text */
   border-radius: 0.25rem !important; /* rounded-sm */
   font-family: "Inter", sans-serif !important;
   font-size: 0.875rem !important; /* text-sm */
